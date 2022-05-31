@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <!--根据id查询,返回一个User-->
+    <select id="queryUserById" resultType="User">
+        select *
+        from user
+        where user_id = #{id}
+    </select>
+
+    <!--增加一个User-->
+    <insert id="addUser" parameterType="User">
+        insert into user(user_id, user_password, user_nickname)
+        values (#{userId}, #{userPassword}, #{userNickname})
+    </insert>
+
+
+</mapper>
