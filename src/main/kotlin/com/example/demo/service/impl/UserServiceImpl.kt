@@ -2,24 +2,24 @@ package com.example.demo.service.impl
 
 import com.example.demo.mapper.UserMapper
 import com.example.demo.po.User
-import javax.annotation.Resource
+import com.example.demo.service.UserService
+import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * @author     ：ChengShouYi
  * @date       ： 2022/5/31 16:43
  * @description :TODO
  */
-class UserServiceImpl {
+class UserServiceImpl:UserService {
 
-    @Resource
-    var userMapper: UserMapper? = null
+    @Autowired
+    lateinit var userMapper: UserMapper
 
-    fun queryUserById(id: String?): User? {
+    override fun queryUserById(id: String): User? {
         return userMapper.queryUserById(id)
     }
 
-
-    fun addUser(user: User?) {
+    override fun addUser(user: User) {
         userMapper.addUser(user)
     }
 
