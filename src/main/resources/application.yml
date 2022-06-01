@@ -45,7 +45,7 @@ spring:
 
 mybatis:
   type-aliases-package: com/example/demo/po,;com/example/demo/dto,;com/example/demo/vo  #配置mybatis类别名，这样XML可以不用写全限定名称
-  mapper-locations: classpath:com/line/myprojectservice/mapper/*.xml  #配置mapper映射文件路径
+  mapper-locations: classpath:mapper/*.xml  #配置mapper映射文件路径
   configuration:
     map-underscore-to-camel-case: true  #驼峰命名转换
     cache-enabled: false  #禁用二级缓存

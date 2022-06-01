@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * @author     ：ChengShouYi
- * @date       ： 2022/5/31 16:43
+ * @date       ：2022/5/31 16:43
  * @description :TODO
  */
-class UserServiceImpl:UserService {
+class UserServiceImpl : UserService {
 
     @Autowired
     lateinit var userMapper: UserMapper
