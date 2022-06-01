@@ -6,9 +6,7 @@ import org.springframework.boot.runApplication
 
 @MapperScan("com.example.demo.mapper")
 @SpringBootApplication
-open class DemoApplication{
+class DemoApplication
 fun main(args: Array<String>) {
     runApplication<DemoApplication>(*args)
-}
-
 }

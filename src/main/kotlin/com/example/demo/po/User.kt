@@ -8,7 +8,7 @@ package com.example.demo.po
 data class User(
     var userId: String,
     var userPassword: String,
-    var userNickname: String
+    var userNickname: String?
 ) {}
 
 
