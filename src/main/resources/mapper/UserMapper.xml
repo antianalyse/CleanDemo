@@ -9,22 +9,22 @@
     <select id="queryUserById" resultType="User">
         select *
         from user
-        where user_id = #{userId}
+        where id = #{id}
     </select>
 
-    <!--根据id和password查询,返回一个User-->
-    <select id="queryUserByIdAndPassword" resultType="User">
-        select *
-        from user
-        where user_id = #{userId}
-          and user_password = #{userPassword}
-    </select>
+<!--    &lt;!&ndash;根据id和password查询,返回一个User&ndash;&gt;-->
+<!--    <select id="queryUserByIdAndPassword" resultType="User">-->
+<!--        select *-->
+<!--        from user-->
+<!--        where id = #{id}-->
+<!--          and password = #{password}-->
+<!--    </select>-->
 
 
     <!--增加一个User-->
     <insert id="addUser" parameterType="User">
-        insert into user(user_id, user_password, user_nickname)
-        values (#{userId}, #{userPassword}, #{userNickname})
+        insert into user(id, password, nickname)
+        values (#{id}, #{password}, #{nickname})
     </insert>
 
 

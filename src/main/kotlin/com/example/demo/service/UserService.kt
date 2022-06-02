@@ -10,7 +10,10 @@ import com.example.demo.po.User
 interface UserService {
     fun queryUserById(id: String): User?
     fun addUser(user: User)
-    fun queryUserByIdAndPassword(userId: String, userPassword: String): User?
-    fun validate(loginUser: User): User?
+
+
+//    fun queryUserByIdAndPassword(userId: String, userPassword: String): User?
+
+//    fun validate(loginUser: User): User?
 
 }

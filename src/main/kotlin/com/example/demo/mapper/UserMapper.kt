@@ -10,6 +10,6 @@ import com.example.demo.po.User
 interface UserMapper {
     fun queryUserById(id: String): User?
     fun addUser(user: User)
-    fun queryUserByIdAndPassword(userId: String, userPassword: String): User?
+    fun queryUserByIdAndPassword(id: String, password: String): User?
 
 }

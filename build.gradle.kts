@@ -38,7 +38,10 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.29")
     implementation("com.alibaba:druid-spring-boot-starter:1.2.9")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.7.0")
+    implementation("cn.hutool:hutool-all:5.8.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 }
 
 tasks.withType<KotlinCompile> {

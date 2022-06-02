@@ -6,9 +6,10 @@ package com.example.demo.po
  * @description :TODO
  */
 data class User(
-    var userId: String,
-    var userPassword: String,
-    var userNickname: String?
+    var id: String,
+    var password: String?,
+    var nickname: String?,
+    var role: String
 ) {}
 
 

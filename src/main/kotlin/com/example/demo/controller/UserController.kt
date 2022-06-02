@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/user")
-class UserController(val userService: UserService) {
+class UserController(val userService   : UserService) {
 
 //    @Autowired
 //    lateinit var userService: UserService
 
     @PostMapping("/login")
+
     fun login(@RequestBody loginUser: User): User? {
         return userService.validate(loginUser)
     }
