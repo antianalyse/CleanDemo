@@ -7,13 +7,11 @@ import com.example.demo.po.User
  * @date       ：2022/5/31 16:42
  * @description :TODO
  */
-interface UserService {
+interface LoginService {
     fun queryUserById(id: String): User?
     fun addUser(user: User)
 
+    fun login(user: User): String
 
-//    fun queryUserByIdAndPassword(userId: String, userPassword: String): User?
-
-//    fun validate(loginUser: User): User?
 
 }

@@ -1,7 +1,8 @@
 package com.example.demo.controller
 
 import com.example.demo.po.User
-import com.example.demo.service.UserService
+import com.example.demo.service.LoginService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,16 +15,23 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/user")
-class UserController(val userService   : UserService) {
+class UserController {
 
-//    @Autowired
-//    lateinit var userService: UserService
+    @Autowired
+    lateinit var loginService: LoginService
+
 
     @PostMapping("/login")
+    fun login(@RequestBody user: User): String {
 
-    fun login(@RequestBody loginUser: User): User? {
-        return userService.validate(loginUser)
+        return loginService.login(user)
+
     }
+
+//    @RequestMapping("/user/logout")
+//    fun logout(): String {
+//        return userService.logout()
+//    }
 
 
 }

@@ -6,20 +6,11 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
     <!--根据id查询,返回一个User-->
-    <select id="queryUserById" resultType="User">
+    <select id="queryUserByUserName" resultType="User">
         select *
         from user
-        where id = #{id}
+        where username = #{userName}
     </select>
-
-<!--    &lt;!&ndash;根据id和password查询,返回一个User&ndash;&gt;-->
-<!--    <select id="queryUserByIdAndPassword" resultType="User">-->
-<!--        select *-->
-<!--        from user-->
-<!--        where id = #{id}-->
-<!--          and password = #{password}-->
-<!--    </select>-->
-
 
     <!--增加一个User-->
     <insert id="addUser" parameterType="User">

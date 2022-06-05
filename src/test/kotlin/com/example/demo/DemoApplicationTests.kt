@@ -3,7 +3,9 @@ package com.example.demo
 import com.example.demo.mapper.UserMapper
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.annotation.Resource
+
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -14,7 +16,17 @@ class DemoApplicationTests {
     @Test
     fun contextLoads() {
 
-        println(mapper.queryUserById("1111")
+        // 创建密码加密的对象
+        val passwordEncoder = BCryptPasswordEncoder()
+        // 密码加密
+        val newPassword = passwordEncoder.encode("a123456")
+        println("44444444444444444444444444444444")
+        println(newPassword)
+
+
+
+
+        println(mapper.queryUserByUserName("1111")
         )
 
     }

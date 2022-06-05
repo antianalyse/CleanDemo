@@ -7,6 +7,7 @@ import org.springframework.boot.runApplication
 @MapperScan("com.example.demo.mapper")
 @SpringBootApplication
 class DemoApplication
+
 fun main(args: Array<String>) {
     runApplication<DemoApplication>(*args)
 }

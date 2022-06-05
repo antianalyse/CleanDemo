@@ -1,12 +1,16 @@
 package com.example.demo.config
 
+//import com.example.demo.filter.JwtAuthenticationTokenFilter
+
+import com.example.demo.filter.JwtFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -15,6 +19,7 @@ import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
+
 /**
  * @author     ：ChengShouYi
  * @date       ：2022/6/2 15:26
@@ -22,40 +27,43 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true) //开启前置和后置验证
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //开启方法注解
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
-    //创建BCryptPasswordEncoder注入容器
+    // JWT拦截器
+    @Autowired
+    private val jwtFilter: JwtFilter? = null
+
+    // 认证失败处理器
+    @Autowired
+    private val authenticationEntryPoint: AuthenticationEntryPoint? = null
+
+    // 拒绝处理器
+    @Autowired
+    private val accessDeniedHandler: AccessDeniedHandler? = null
+
+    // 注入BCryptPasswordEncoder
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 
-    @Autowired
-    private val jwtAuthenticationTokenFilter: JwtAuthenticationTokenFilter? = null
-
-    //认证失败
-    @Autowired
-    private val authenticationEntryPoint: AuthenticationEntryPoint? = null
-
-    //拒绝处理器
-    @Autowired
-    private val accessDeniedHandler: AccessDeniedHandler? = null
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
-            .csrf().disable() //关闭csrf
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //不通过Session获取SecurityContext
+            //关闭csrf
+            .csrf().disable()
+            //不通过Session获取SecurityContext
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
             .antMatchers("/user/login").anonymous()
-            // .antMatchers("/testCors").hasAuthority("system:dept:list222")
             // 除上面外的所有请求全部需要鉴权认证
             .anyRequest().authenticated()
 
-        //添加过滤器
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
+        //添加JWT拦截器
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
 
         //配置异常处理器
         http.exceptionHandling() //配置认证失败处理器
@@ -66,9 +74,18 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         http.cors()
     }
 
+    //开启角色继承
+    @Bean
+    fun roleHierarchy(): RoleHierarchy? {
+        val hierarchy = RoleHierarchyImpl()
+        hierarchy.setHierarchy("ROLE_MANAGER > ROLE_VIP > ROLE_USER > ROLE_SEAL")
+        return hierarchy
+    }
+
     @Bean
     @Throws(Exception::class)
     override fun authenticationManagerBean(): AuthenticationManager {
         return super.authenticationManagerBean()
     }
+
 }
