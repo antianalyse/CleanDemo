@@ -10,16 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails
  * @description :TODO
  */
 data class User(
-    var userName: String,
-    var userPassword: String,
-    var nickname: String?,
-    var role: String?
+    var userName: String ="",
+    var userPassword: String="",
+    var nickname: String="",
+    var role: String=""
 ) : UserDetails {
 
+
     override fun getAuthorities(): Collection<GrantedAuthority?> {
-
         return AuthorityUtils.commaSeparatedStringToAuthorityList(role)
-
     }
 
     override fun getUsername(): String {
