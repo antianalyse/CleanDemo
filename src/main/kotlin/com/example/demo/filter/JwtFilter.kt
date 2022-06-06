@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse
  * @description :TODO
  */
 @Component
- class JwtFilter : OncePerRequestFilter() {
+class JwtFilter : OncePerRequestFilter() {
 
     @Throws(ServletException::class, IOException::class)
     override fun doFilterInternal(
@@ -30,19 +30,29 @@ import javax.servlet.http.HttpServletResponse
     ) {
         //获取token
         val token = request.getHeader("token")
-
         if (token == null) {
+
+            println("没有token")
+
             //放行
             filterChain.doFilter(request, response)
             return
         }
 
-        //解析token
         try {
-            val jwt: JWT = JWTUtil.parseToken(token)
+//            val user = JSONUtil.toBean(jwt.getPayload("token").toString(), User::class.java)
 
-//            val user =  ObjectMapper().convertValue(jwt.getPayload("token"), User::class.java)
-            val user = JSONUtil.toBean(jwt.getPayload("token").toString(), User::class.java)
+            //解析token 获取userid
+            val jwt: JWT = JWTUtil.parseToken(token)
+            val json = JSONUtil.parseObj(jwt.getPayload("token"))
+
+            val user = User(
+                json.getStr("userName"),
+                json.getStr("userPassword"),
+                json.getStr("nickname"),
+                json.getStr("role")
+            )
+
 
             //获取权限信息封装到Authentication中
             val authenticationToken =

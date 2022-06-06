@@ -9,13 +9,6 @@ import javax.servlet.http.HttpServletResponse
  * @description :TODO
  */
 object WebUtils {
-    /**
-     * 将字符串渲染到客户端
-     *
-     * @param response 渲染对象
-     * @param string 待渲染的字符串
-     * @return null
-     */
     fun renderString(response: HttpServletResponse, string: String?): String? {
         try {
             response.status = 200

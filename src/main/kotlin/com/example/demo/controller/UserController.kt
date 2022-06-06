@@ -23,15 +23,7 @@ class UserController {
 
     @PostMapping("/login")
     fun login(@RequestBody user: User): String {
-
         return loginService.login(user)
-
     }
-
-//    @RequestMapping("/user/logout")
-//    fun logout(): String {
-//        return userService.logout()
-//    }
-
 
 }

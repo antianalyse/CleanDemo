@@ -10,8 +10,6 @@ import com.example.demo.po.User
 interface LoginService {
     fun queryUserById(id: String): User?
     fun addUser(user: User)
-
     fun login(user: User): String
-
 
 }

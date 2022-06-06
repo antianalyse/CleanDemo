@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails
  * @description :TODO
  */
 data class User(
-    var userName: String ="",
-    var userPassword: String="",
-    var nickname: String="",
-    var role: String=""
+    var userName: String,
+    var userPassword: String,
+    var nickname: String?,
+    var role: String?
 ) : UserDetails {
 
 

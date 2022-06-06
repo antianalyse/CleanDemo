@@ -17,21 +17,21 @@ class Demo {
     @PreAuthorize(value = "hasAuthority('ROLE_USER')")
     @GetMapping("/user")
     fun demo1( ): String {
-        println("进来了   普通人 ######### ############################################")
+        println("进来了   普通人 ")
         return "验证成功"
     }
 
     @PreAuthorize(value = "hasAuthority('ROLE_VIP')")
     @GetMapping("/vip")
     fun demo2( ): String {
-        println("进来了  vip   ##########      #############################################")
+        println("进来了  vip")
         return "验证成功"
     }
 
     @PreAuthorize(value = "hasAuthority('ROLE_MANAGER')")
     @GetMapping("/manager")
     fun demo3( ): String {
-        println("进来了    manager  ##########      #############################################")
+        println("进来了    manager ")
         return "验证成功"
     }
 
