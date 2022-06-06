@@ -1,7 +1,6 @@
 package com.example.demo.handler
 
 import com.example.demo.utils.WebUtils
-import org.springframework.http.HttpStatus
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.stereotype.Component
@@ -23,8 +22,8 @@ class AuthenticationEntryPointImpl : AuthenticationEntryPoint {
         response: HttpServletResponse,
         authException: AuthenticationException?
     ) {
-        val result = "用户认证失败请重新登录"
-        //处理异常
+        val result = "用户认证失败，请重新登录"
+
         WebUtils.renderString(response, result)
     }
 }

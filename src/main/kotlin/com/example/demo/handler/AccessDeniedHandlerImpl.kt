@@ -1,7 +1,6 @@
 package com.example.demo.handler
 
 import com.example.demo.utils.WebUtils
-import org.springframework.http.HttpStatus
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.stereotype.Component
@@ -24,7 +23,7 @@ class AccessDeniedHandlerImpl : AccessDeniedHandler {
         accessDeniedException: AccessDeniedException?
     ) {
         val result = "您的权限不足"
-        //处理异常
+
         WebUtils.renderString(response, result)
     }
 }

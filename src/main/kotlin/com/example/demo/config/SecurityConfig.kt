@@ -42,6 +42,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val accessDeniedHandler: AccessDeniedHandler? = null
 
+
     // 注入BCryptPasswordEncoder
     @Bean
     fun passwordEncoder(): PasswordEncoder {
