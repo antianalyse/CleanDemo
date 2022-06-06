@@ -40,7 +40,7 @@ dependencies {
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
     implementation("org.springframework.boot:spring-boot-starter-security:2.5.0")
     implementation("cn.hutool:hutool-all:5.8.2")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1")
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
