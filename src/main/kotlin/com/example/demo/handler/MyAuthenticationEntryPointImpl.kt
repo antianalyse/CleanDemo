@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
  * @description :TODO
  */
 @Component
-class AuthenticationEntryPointImpl : AuthenticationEntryPoint {
+class MyAuthenticationEntryPointImpl : AuthenticationEntryPoint {
     @Throws(IOException::class, ServletException::class)
     override fun commence(
         request: HttpServletRequest,

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
  * @description :TODO
  */
 @Component
-class AccessDeniedHandlerImpl : AccessDeniedHandler {
+class MyAccessDeniedHandlerImpl : AccessDeniedHandler {
     @Throws(IOException::class, ServletException::class)
     override fun handle(
         request: HttpServletRequest,

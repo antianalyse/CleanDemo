@@ -39,15 +39,15 @@ class LoginServiceImpl : LoginService {
     override fun login(user: User): String {
 
         //AuthenticationManager authenticate进行用户认证
-        val authenticationToken = UsernamePasswordAuthenticationToken(user.userName, user.userPassword)
+        val authenticationToken = UsernamePasswordAuthenticationToken(user.username, user.password)
 
         //验证不通过，直接抛出异常到 异常处理控制器
         val authenticate: Authentication = authenticationManager.authenticate(authenticationToken)
 
 
         //认证通过了 生成一个jwt
-        val loginUser: User = authenticate.principal as User
-        loginUser.userPassword = ""
+        var loginUser: User = authenticate.principal as User
+
 
         val token = JWT.create()
             .setPayload("token", loginUser)

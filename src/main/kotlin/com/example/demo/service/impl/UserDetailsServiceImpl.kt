@@ -21,7 +21,7 @@ class UserDetailsServiceImpl : UserDetailsService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(id: String): User {
 
-        println("加载用户" + userMapper.queryUserByUserName(id))
+        println("加载用户" + id +" %%%" + userMapper.queryUserByUserName(id))
 
         return userMapper.queryUserByUserName(id)?: throw UsernameNotFoundException("用户名或者密码错误")
 
