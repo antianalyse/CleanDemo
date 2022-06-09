@@ -23,35 +23,13 @@ class LoginServiceImpl : LoginService {
     @Resource
     private lateinit var userMapper: UserMapper
 
-
     @Autowired
-    lateinit var authenticationManager: AuthenticationManager
-
-    override fun queryUserById(id: String): User? {
-        return userMapper.queryUserByUserName(id)
-    }
-
-    override fun addUser(user: User) {
-        userMapper.addUser(user)
-    }
+    lateinit var authentication: Authentication
 
 
-    override fun login(user: User): String {
-
-        //AuthenticationManager authenticate进行用户认证
-        val authenticationToken = UsernamePasswordAuthenticationToken(user.username, user.password)
-
-        //验证不通过，直接抛出异常到 异常处理控制器
-        val authenticate: Authentication = authenticationManager.authenticate(authenticationToken)
+    override fun checkLogin(): String {
 
 
-        //认证通过了 生成一个jwt
-        var loginUser: User = authenticate.principal as User
-
-
-        val token = JWT.create()
-            .setPayload("token", loginUser)
-            .setKey("Line".toByteArray()).sign()
 
         return token
     }

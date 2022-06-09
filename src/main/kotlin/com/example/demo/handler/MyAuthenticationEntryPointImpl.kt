@@ -1,5 +1,7 @@
 package com.example.demo.handler
 
+import cn.hutool.json.JSONUtil
+import com.example.demo.utils.Result
 import com.example.demo.utils.WebUtils
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -22,7 +24,8 @@ class MyAuthenticationEntryPointImpl : AuthenticationEntryPoint {
         response: HttpServletResponse,
         authException: AuthenticationException?
     ) {
-        val result = "用户认证失败，请重新登录"
+
+        val result=  JSONUtil.toJsonStr(Result( "用户认证失败，请重新登录")   )
 
         WebUtils.renderString(response, result)
     }
