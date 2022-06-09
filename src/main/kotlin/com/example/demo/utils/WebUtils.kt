@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse
  * @description :TODO
  */
 object WebUtils {
-    fun renderString(response: HttpServletResponse, string: String?): String? {
+    fun renderString(response: HttpServletResponse, string: String?){
         try {
             response.status = 200
             response.contentType = "application/json"
@@ -18,6 +18,5 @@ object WebUtils {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        return null
     }
 }

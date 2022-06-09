@@ -12,6 +12,4 @@ interface UserMapper {
 
     fun queryUserByUserName(userName: String): User?
 
-    fun addUser(user: User)
-
 }

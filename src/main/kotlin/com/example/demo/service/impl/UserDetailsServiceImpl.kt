@@ -19,12 +19,9 @@ class UserDetailsServiceImpl : UserDetailsService {
     lateinit var userMapper: UserMapper
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(id: String): User {
-
-        println("加载用户" + id +" %%%" + userMapper.queryUserByUserName(id))
-
-        return userMapper.queryUserByUserName(id)?: throw UsernameNotFoundException("用户名或者密码错误")
-
+    override fun loadUserByUsername(username: String): User {
+        return userMapper.queryUserByUserName(username) ?: throw UsernameNotFoundException("用户名或者密码错误")
     }
+
 }
 

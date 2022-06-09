@@ -25,18 +25,12 @@ import org.springframework.security.crypto.password.PasswordEncoder
  */
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //开启方法注解
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
-//    // JWT拦截器
-//    @Autowired
-//    private val jwtFilter: JwtFilter? = null
-
-    // 认证失败处理器
     @Autowired
     private val myAuthenticationEntryPointImpl: MyAuthenticationEntryPointImpl? = null
 
-    // 拒绝处理器
     @Autowired
     private val myAccessDeniedHandlerImpl: MyAccessDeniedHandlerImpl? = null
 
@@ -50,7 +44,9 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
         http
             .authorizeRequests()//配置权限
-            .anyRequest().authenticated()//任意请求需要登录
+            .antMatchers("/open/**")
+            .permitAll()
+            .anyRequest().authenticated()//任意请求都需要验证
             .and()
             .formLogin()//开启formLogin默认配置
             .loginProcessingUrl("/login")//post登录接口，登录验证由系统实现
@@ -60,10 +56,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .successHandler(MyAuthenticationSuccessHandler())
             .and()
             .csrf().disable()//禁用csrf
-
-
-//        //添加JWT拦截器
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
 
 
         //配置异常处理器

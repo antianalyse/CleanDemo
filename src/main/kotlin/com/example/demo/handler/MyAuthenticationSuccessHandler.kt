@@ -27,12 +27,6 @@ class MyAuthenticationSuccessHandler : AuthenticationSuccessHandler {
 
         val user: User = authentication.principal as User
         val userJson = JSONUtil.toJsonPrettyStr(user)
-//
-//        val token = JWT.create()
-//            .setPayload("token", user)
-//            .setKey("Line".toByteArray()).sign()
-//
-//        WebUtils.renderString(httpServletResponse, token)
 
         WebUtils.renderString(httpServletResponse, userJson)
 

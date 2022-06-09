@@ -6,7 +6,4 @@ package com.example.demo.utils
  * @description :TODO
  */
 data class Result( val data :String) {
-
-
-
 }
