@@ -1,8 +1,8 @@
 package com.example.demo.handler
 
 import cn.hutool.json.JSONUtil
-import com.example.demo.po.User
-import com.example.demo.utils.WebUtils
+import com.example.demo.utils.ResponseUtils
+import com.example.demo.utils.Result
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import java.io.IOException
@@ -20,16 +20,14 @@ import javax.servlet.http.HttpServletResponse
 class MyAuthenticationSuccessHandler : AuthenticationSuccessHandler {
     @Throws(IOException::class, ServletException::class)
     override fun onAuthenticationSuccess(
-        httpServletRequest: HttpServletRequest,
-        httpServletResponse: HttpServletResponse,
+        request: HttpServletRequest,
+        response: HttpServletResponse,
         authentication: Authentication
     ) {
 
-        val user: User = authentication.principal as User
-        val userJson = JSONUtil.toJsonPrettyStr(user)
+        val result = JSONUtil.toJsonStr(Result("登陆成功", null))
 
-        WebUtils.renderString(httpServletResponse, userJson)
+        ResponseUtils.renderString(response, result)
 
-        println("登陆成功")
     }
 }

@@ -8,7 +8,7 @@ import javax.annotation.Resource
 
 
 @SpringBootTest
-class DemoApplicationTests {
+class DemoControllerApplicationTests {
 
     @Resource
     lateinit var mapper: UserMapper

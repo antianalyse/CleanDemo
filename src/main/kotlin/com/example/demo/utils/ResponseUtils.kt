@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse
 
 /**
  * @author     ：Line
- * @date       ： 2022/6/5 17:36
+ * @date       ：2022/6/5 17:36
  * @description :TODO
  */
-object WebUtils {
+object ResponseUtils {
     fun renderString(response: HttpServletResponse, string: String?){
         try {
             response.status = 200

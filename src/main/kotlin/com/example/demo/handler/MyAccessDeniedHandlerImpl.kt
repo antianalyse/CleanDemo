@@ -1,8 +1,7 @@
 package com.example.demo.handler
 
 import cn.hutool.json.JSONUtil
-import com.example.demo.utils.Result
-import com.example.demo.utils.WebUtils
+import com.example.demo.utils.ResponseUtils
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.stereotype.Component
@@ -25,8 +24,8 @@ class MyAccessDeniedHandlerImpl : AccessDeniedHandler {
         accessDeniedException: AccessDeniedException?
     ) {
 
-        val result=  JSONUtil.toJsonStr(Result( "您的权限不足")   )
+        val result = JSONUtil.toJsonStr(com.example.demo.utils.Result("您的权限不足", null))
 
-        WebUtils.renderString(response, result)
+        ResponseUtils.renderString(response, result)
     }
 }
