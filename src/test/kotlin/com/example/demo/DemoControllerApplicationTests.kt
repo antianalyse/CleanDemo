@@ -20,11 +20,8 @@ class DemoControllerApplicationTests {
         val passwordEncoder = BCryptPasswordEncoder()
         // 密码加密
         val newPassword = passwordEncoder.encode("a123456")
-        println("44444444444444444444444444444444")
+
         println(newPassword)
-
-
-
 
         println(mapper.queryUserByUserName("1111")
         )
