@@ -1,10 +1,9 @@
 package com.example.demo
 
-import org.mybatis.spring.annotation.MapperScan
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.runApplication
 
-@MapperScan("com.example.demo.mapper")
 @SpringBootApplication
 class DemoApplication
 

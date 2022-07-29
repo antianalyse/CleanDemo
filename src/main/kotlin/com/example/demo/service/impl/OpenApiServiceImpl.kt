@@ -1,7 +1,6 @@
 package com.example.demo.service.impl
 
 import com.example.demo.service.OpenApiService
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 
 /**
@@ -11,10 +10,8 @@ import org.springframework.stereotype.Service
  */
 @Service
 class OpenApiServiceImpl : OpenApiService {
-
-    //如果是匿名身份，返回false
     override fun checkLoginStatus(): Boolean {
-        return !SecurityContextHolder.getContext().authentication.principal.equals("anonymousUser")
+        return true
     }
 
 }
