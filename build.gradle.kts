@@ -5,6 +5,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+
 plugins {
     java
     id("org.springframework.boot") version "2.7.2"
@@ -43,6 +44,8 @@ allprojects {
 
 subprojects {
     dependencies {
+
+
 //        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
