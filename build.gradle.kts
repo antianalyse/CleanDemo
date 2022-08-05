@@ -1,3 +1,4 @@
+import org.gradle.internal.impldep.com.fasterxml.jackson.core.JsonPointer.compile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -20,25 +21,14 @@ repositories {
 
 dependencies {
     implementation("cn.hutool:hutool-all:5.8.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5")
 
-//    implementation("com.fasterxml.jackson.core:jackson-core:2.9.5")
-//    implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.5")
-
-    // databind 包含 core 和 annotations
-//    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.5")
-
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3"){
-//        exclude(module = "jackson-annotations")
-//        exclude(module = "jackson-databind")
-//        exclude(module = "jackson-core")
-//        exclude(module = "kotlin-reflect")
-    }
 
     implementation("mysql:mysql-connector-java:8.0.29")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

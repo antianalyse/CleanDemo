@@ -1,252 +1,130 @@
 package com.example.demo
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonSubTypes
-import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import java.util.*
+import org.springframework.context.annotation.Bean
+import java.io.BufferedInputStream
+import kotlin.math.cos
+
 
 @SpringBootTest
 class DemoControllerApplicationTests {
 
-    val string = """
-        [
-    {
-        "fieldName": "_fulltext",
-        "columnIsMeta": true,
-        "fieldDataType": "StringType",
-         "fieldMetadata": { },
-        "fieldData": "机密秘密绝密 机密秘密绝密 机密秘密绝密 机密秘密绝密 机密秘密绝密 机密秘密绝密 机密秘密绝密 机密秘密绝密 jdbc:mysql://192.168.100.48:3306/ceping_20220409/132b_character"
-   }
-    ]
-"""
+    class HTML {
+        fun body() {
+            println("HTML BODY")
+        }
+    }
+
+    fun html(init: HTML.() -> Unit): HTML { // HTML.()中的HTML是接受者类型
+        val html = HTML()  // 创建接收者对象
+        html.init()        // 将该接收者对象传给该 lambda
+        return html
+    }
 
     @Test
     fun test() {
-////        val objectMapper: ObjectMapper = ObjectMapper().findAndRegisterModules().registerModule(KotlinModule())
-//        val objectMapper: ObjectMapper = jacksonObjectMapper()
-//
-//
-//        val test = listOf(FieldDescription("haha", true, FieldDataType.TagType, mapOf(), "566"))
-//        val testString = objectMapper.writeValueAsString(test)
-//        testString
-//        val typeReference = object : TypeReference<List<FieldDescription>>() {}
-//        val state = objectMapper.readValue(testString, typeReference)
-//        state
-//
 
-        val a: ByteArray? = null
+        val a = membersOf<String>()
 
-        println( Base64.getEncoder().encodeToString(a))
+        println(membersOf<String>().joinToString("\n"))
+
+        System.out.println()
+    }
+
+
+    @get:Synchronized
+    val a =1
+
+    class aaaa{
+
+        @Synchronized  fun findFixPoint(x: Double = 1.0): Double =
+
+            if (x == cos(x))
+                x
+            else
+                findFixPoint(cos(x))
 
 
     }
-}
 
-data class RowTransmission(
-    val fieldDescriptionList: List<FieldDescription>
-)
 
-@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
-data class FieldDescription(
-    val fieldName: String,
-    val columnIsMeta: Boolean,
-    val fieldDataType: FieldDataType,
-    val fieldMetadata: Map<String, String>?,
-    val fieldData: Any?
-) {
-    constructor() : this("", false, FieldDataType.StringType, mapOf(), "")
-}
+    private inline fun <reified T> membersOf() = T::class.members
 
-enum class FieldDataType {
-    TagType, MingzhongdecishuType, BooleanType, NumberType, StringType, BinaryType, BinariesType
-}
+    @Bean
+    fun objectMapper(): ObjectMapper {
 
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tagType")
-@JsonSubTypes(
-    JsonSubTypes.Type(value = SimpleTag::class, name = "SimpleTag"),
-    JsonSubTypes.Type(value = PathTag::class, name = "PathTag"),
-    JsonSubTypes.Type(value = AppendTag::class, name = "AppendTag"),
-    JsonSubTypes.Type(value = EmbeddedTag::class, name = "EmbeddedTag"),
-    JsonSubTypes.Type(value = FeatureWhiteTag::class, name = "FeatureWhiteTag"),
-    JsonSubTypes.Type(value = FeatureBlackTag::class, name = "FeatureBlackTag"),
-    JsonSubTypes.Type(value = RedHeadTag::class, name = "RedHeadTag"),
-    JsonSubTypes.Type(value = SecurityTag::class, name = "SecurityTag"),
-    JsonSubTypes.Type(value = SecurityNoMatchTag::class, name = "SecurityNoMatchTag"),
-    JsonSubTypes.Type(value = PreciseBlackTag::class, name = "PreciseBlackTag"),
-    JsonSubTypes.Type(value = PreciseWhiteTag::class, name = "PreciseWhiteTag")
-)
-sealed class TagNorm(
-    val tagDescription: TagDescription, val path: String, val text: String, val range: IntRange?
-)
 
-class SimpleTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagDescription, path, text, range)
+        synchronized(this){}
 
-class PathTag(tagDescription: TagDescription, path: String, val field: String, text: String, range: IntRange?) :
-    TagNorm(tagDescription, path, text, range)
 
-class AppendTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagDescription, path, text, range)
 
-class EmbeddedTag(
-    tagDescription: TagDescription, path: String, text: String, range: IntRange?, val type: EmbeddedGenre
-) : TagNorm(tagDescription, path, text, range)
+        return jacksonObjectMapper()
+    }
 
-class FeatureWhiteTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?, val rate: Double) :
-    TagNorm(tagDescription, path, text, range)
 
-class FeatureBlackTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?, val rate: Double) :
-    TagNorm(tagDescription, path, text, range)
+    // byte转为int
+    fun byteToInt(bytes: ByteArray): Int {
+        var value = 0
+        for (i in 0..3) {
+            val shift = (3 - i) * 8
+            value += bytes[i].toInt() and 0xFF shl shift
+        }
+        return value
+    }
 
-class RedHeadTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagDescription, path, text, range)
-
-class SecurityTag(
-    tagDescription: TagDescription,
-    path: String,
-    text: String,
-    range: IntRange?,
-    val rate: Int,
-    val safetyLevel: SafetyLevel
-) : TagNorm(tagDescription, path, text, range)
-
-class SecurityNoMatchTag(tagDescription: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagDescription, path, text, range)
-
-class PreciseBlackTag(tagType: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagType, path, text, range)
-
-class PreciseWhiteTag(tagType: TagDescription, path: String, text: String, range: IntRange?) :
-    TagNorm(tagType, path, text, range)
-
-/**
- * suoyouTag的注释
- * */
-enum class TagDescription {
-    /**
-     * 身份证
-     */
-    IdentityCard,
 
     /**
-     * 电话/手机号
-     */
-    TelNumber,
-
-    /**
-     * 路径
-     */
-    FilePath,
-
-    /**
-     * 邮件
-     */
-    Email,
-
-    /**
-     * 特征白名单
-     */
-    FeatureWhite,
-
-    /**
-     * 特征黑名单
-     */
-    FeatureBlack,
-
-    /**
-     * 红头
-     */
-    RedHead,
-
-    /**
-     * 疑似涉密
-     */
-    Security,
-
-    /**
-     * 高密低存
+     * 取开头的前4位，表示长度，并返回（长度 + 原字节数组）
      *
-     * 疑似存储了与密级不匹配的涉密信息
-     */
-    SecurityNoMatch,
+     * ByteArray 范围是 Int，Int占4字节，将Int类型的 size 转为字节数组（大端序）
+     * */
+    fun recordSizeAndBack(originArray: ByteArray): ByteArray {
+        val size = originArray.size
+        val sizeBytes = ByteArray(4)
+        sizeBytes[0] = (size shr 24 and 0xFF).toByte()
+        sizeBytes[1] = (size shr 16 and 0xFF).toByte()
+        sizeBytes[2] = (size shr 8 and 0xFF).toByte()
+        sizeBytes[3] = (size and 0xFF).toByte()
+
+        var newArray = ByteArray(4 + size)
+        newArray = originArray.copyInto(newArray, destinationOffset = 4)
+        newArray = sizeBytes.copyInto(newArray)
+        return newArray
+    }
 
     /**
-     * 精确黑名单
-     */
-    PreciseBlack,
+     * 根据开头的长度，读出相应长度的数据
+     *
+     * @return 读完时，返回 null
+     * */
+    fun readOne(buffer: BufferedInputStream): ByteArray? {
+        var realData: ByteArray? = null
+        try {
+            buffer.use {
+                val sizeArray = IntArray(4)
+                repeat(4) {
+                    val temp = buffer.read()
+                    if (temp == -1) return null
+                    else sizeArray[it] = temp
+                }
+                var size = 0
+                for (i in 0..3) {
+                    val shift = (3 - i) * 8
+                    size += sizeArray[i].toByte().toInt() and 0xFF shl shift
+                }
+                realData = ByteArray(size)
+                buffer.read(realData!!)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            println("")
+        }
+        return realData
+    }
 
-    /**
-     * 精确白名单
-     */
-    PreciseWhite,
 
-    /**
-     * 加密文件
-     */
-    EncFile,
-
-    /**
-     * 加密邮件
-     */
-    EncMail,
-
-    /**
-     * 密标
-     */
-    LabelFile,
-
-    /**
-     * 文件夹带-拼接
-     */
-    Append,
-
-    /**
-     * 文件夹带-内嵌
-     */
-    InEmbed,
-
-    /**
-     * 文件夹带-外嵌
-     */
-    OutEmbed
-}
-
-enum class EmbeddedGenre {
-    NEIQIAN, WAIQIAN, PINJIE
-}
-
-enum class SafetyLevel {
-    /**
-     * 公开
-     */
-    Public,
-
-    /**
-     * 内部
-     */
-    Inner,
-
-    /**
-     * 秘密
-     */
-    Mimi,
-
-    /**
-     * 机密
-     */
-    Jimi,
-
-    /**
-     * 绝密
-     */
-    Juemi,
-
-    /**
-     * 未知
-     */
-    Unknown
 }
 
