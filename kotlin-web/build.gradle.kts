@@ -1,4 +1,9 @@
 
+
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation("mysql:mysql-connector-java:8.0.29")
 
@@ -8,4 +13,7 @@ dependencies {
         exclude(group = "junit", module = "junit")
     }
 }
+
+
+
 

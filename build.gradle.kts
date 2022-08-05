@@ -44,18 +44,12 @@ allprojects {
 
 subprojects {
     dependencies {
-
         implementation("cn.hutool:hutool-all:5.8.3")
         implementation("io.reactivex.rxjava3:rxjava:3.1.5")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
-    }
-
-    tasks.test {
-        useJUnitPlatform()
     }
 }
 
