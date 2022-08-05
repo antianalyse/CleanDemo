@@ -5,7 +5,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-
 plugins {
     java
     id("org.springframework.boot") version "2.7.2"
@@ -42,24 +41,17 @@ allprojects {
     }
 }
 
+
 subprojects {
     dependencies {
 
+        implementation("cn.hutool:hutool-all:5.8.3")
+        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 
-//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-//        implementation("cn.hutool:hutool-all:5.8.3")
-//        implementation("mysql:mysql-connector-java:8.0.29")
-//        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
-//        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
-
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
-        implementation("org.springframework.boot:spring-boot-starter")
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(group = "junit", module = "junit")
-        }
     }
 
     tasks.test {

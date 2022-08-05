@@ -26,6 +26,9 @@ class KotlinTest {
 
     @Test
     fun test() {
+
+        println(6696)
+
     }
 
 }
