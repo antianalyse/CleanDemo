@@ -1,14 +1,18 @@
-import kotlinx.coroutines.coroutineScope
+import javafx.application.Application.launch
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+ import java.util.concurrent.TimeUnit
 
 
-suspend fun main() = coroutineScope {
-
-    launch {
-        delay(2000)
-        println("Kotlin Coroutines World!")
-    }
-
+fun main() = runBlocking { // this: CoroutineScope
+    launch { doWorld() }
     println("Hello")
+}
+
+// this is your first suspending function
+suspend fun doWorld() {
+    delay(1000L)
+    println("World!")
 }
