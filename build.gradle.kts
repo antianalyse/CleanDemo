@@ -1,47 +1,79 @@
-import org.gradle.internal.impldep.com.fasterxml.jackson.core.JsonPointer.compile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 plugins {
-    id("org.springframework.boot") version "2.5.0"
+    java
+    id("org.springframework.boot") version "2.7.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 }
 
-group = "com.example"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+allprojects {
+    group = "com.example"
+    version = "1.0.0"
 
-repositories {
-    mavenLocal()
-    maven {
-        setUrl("https://maven.aliyun.com/nexus/content/groups/public")
+    apply {
+        plugin("java")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("org.jetbrains.kotlin.jvm")
+    }
+
+    repositories {
+        mavenLocal()
+        maven {
+            url = uri("https://mirrors.huaweicloud.com/repository/maven/huaweicloudsdk/")
+        }
+        mavenCentral()
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
+        }
     }
 }
 
-dependencies {
-    implementation("cn.hutool:hutool-all:5.8.3")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
+subprojects {
+    dependencies {
+//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+//        implementation("cn.hutool:hutool-all:5.8.3")
+//        implementation("mysql:mysql-connector-java:8.0.29")
+//        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+//        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+        implementation("org.springframework.boot:spring-boot-starter")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(group = "junit", module = "junit")
+        }
+    }
 
-    implementation("mysql:mysql-connector-java:8.0.29")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+    tasks.test {
+        useJUnitPlatform()
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+
+buildscript {
+    val kotlinVersion = "1.6.21"
+    val springBootVersion = "2.7.2"
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
 }
+
 
