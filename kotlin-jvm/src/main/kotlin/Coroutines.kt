@@ -1,28 +1,28 @@
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
+var aa = 1
 
-suspend fun main() {
+fun main() = runBlocking {
+    println("Completed in  ms")
 
+    for (i in 0..100) {
+        launch {
+            delay(2000)
+             aa = aa+5
+        }
+    }
 
-    println(" 0000000000000000000")
-
-
-    val a = fc1()
+    println("wancheng") // main coroutine continues while a pre
+    println(aa) // main coroutine continues while a previous one is delayed
+// vious one is delayed
 
 }
 
 
-private suspend fun fc1() {
-    delay(6000L)
-    println("[firstCoroutineDemo] Hello, 1")
+
+suspend fun doSomethingUsefulTwo(): Int {
+    delay(4000L) // pretend we are doing something useful here, too
+    return 29
 }
-
-private suspend fun fc2() {
-    delay(5000L)
-    println("[firstCoroutineDemo] Hello, 2")
-}
-
-
-
-
-
