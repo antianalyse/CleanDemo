@@ -9,8 +9,8 @@ plugins {
     java
     id("org.springframework.boot") version "2.7.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.spring") version "1.7.10"
 }
 
 allprojects {
@@ -47,15 +47,14 @@ subprojects {
         implementation("cn.hutool:hutool-all:5.8.3")
         implementation("io.reactivex.rxjava3:rxjava:3.1.5")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
-
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
     }
 }
 
 
 buildscript {
-    val kotlinVersion = "1.6.21"
+    val kotlinVersion = "1.7.10"
     val springBootVersion = "2.7.2"
 
     dependencies {

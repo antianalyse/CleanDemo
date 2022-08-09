@@ -1,13 +1,13 @@
-import javafx.application.Application.launch
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
-fun main() {
+suspend fun main() {
 
 
     println(" 0000000000000000000")
+
+
+    val a = fc1()
 
 }
 

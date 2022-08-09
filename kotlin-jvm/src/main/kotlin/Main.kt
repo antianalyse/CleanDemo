@@ -1,7 +1,7 @@
 
 
 
-fun main(args: Array<String>) {
+fun main() {
 
     println(666)
 
