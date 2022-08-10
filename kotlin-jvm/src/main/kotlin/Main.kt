@@ -1,12 +1,13 @@
-import kotlin.system.measureTimeMillis
 
+class aa(val type: String? = "")
 
 fun main() {
-    println(measureTimeMillis {
-        println("---------------------------------------------------")
 
-        println("---------------------------------------------------")
-    })
+
+
+    
+
+
 }
 
 
