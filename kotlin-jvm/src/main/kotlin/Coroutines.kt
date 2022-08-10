@@ -1,28 +1,29 @@
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import kotlin.system.measureTimeMillis
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.actor
 
+//@Volatile
 
-fun simple(): Flow<Int> = flow {
-    for (i in 1..3) {
-        println(i)
-        delay(2000) // preten
-        println(i + 1000)
-// d we are asynchronously waiting 100 ms
-        emit(i) // emit next value
-        println(i + 1000000)
-    }
-}
 
 fun main() = runBlocking<Unit> {
-    val time = measureTimeMillis {
-        simple().collect { value ->
-            println("-----------${value}")
-            delay(5000) // pretend we are processing it for 300 ms
-            println(value)
+
+
+}
+
+
+// This function launches a new counter actor
+fun CoroutineScope.counterActor() = actor<CounterMsg> {
+    var counter = 0 // actor state
+    for (msg in channel) { // iterate over incoming messages
+        when (msg) {
+            is IncCounter -> counter++
+            is GetCounter -> msg.response.complete(counter)
         }
     }
-    println("Collected in $time ms")
 }
+
+// Message types for counterActor
+sealed class CounterMsg
+object IncCounter : CounterMsg() // one-way message to increment counter
+class GetCounter(val response: CompletableDeferred<Int>) : CounterMsg() // a request with reply
+
+
