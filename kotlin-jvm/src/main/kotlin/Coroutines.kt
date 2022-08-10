@@ -1,28 +1,28 @@
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import kotlin.system.measureTimeMillis
 
-var aa = 1
 
-fun main() = runBlocking {
-    println("Completed in  ms")
-
-    for (i in 0..100) {
-        launch {
-            delay(2000)
-             aa = aa+5
-        }
+fun simple(): Flow<Int> = flow {
+    for (i in 1..3) {
+        println(i)
+        delay(2000) // preten
+        println(i + 1000)
+// d we are asynchronously waiting 100 ms
+        emit(i) // emit next value
+        println(i + 1000000)
     }
-
-    println("wancheng") // main coroutine continues while a pre
-    println(aa) // main coroutine continues while a previous one is delayed
-// vious one is delayed
-
 }
 
-
-
-suspend fun doSomethingUsefulTwo(): Int {
-    delay(4000L) // pretend we are doing something useful here, too
-    return 29
+fun main() = runBlocking<Unit> {
+    val time = measureTimeMillis {
+        simple().collect { value ->
+            println("-----------${value}")
+            delay(5000) // pretend we are processing it for 300 ms
+            println(value)
+        }
+    }
+    println("Collected in $time ms")
 }
