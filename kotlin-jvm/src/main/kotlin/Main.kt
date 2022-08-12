@@ -1,10 +1,9 @@
 
-class aa(val type: String? = "")
 
 fun main() {
 
 
-
+    println(6666)
     
 
 
