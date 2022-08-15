@@ -1,13 +1,12 @@
 
+import jdk.nashorn.api.scripting.ScriptObjectMirror
 
 fun main() {
 
-
-    println(6666)
-    
-
+   val a = 5 as  ScriptObjectMirror
 
 }
+
 
 
 

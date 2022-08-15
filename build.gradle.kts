@@ -1,16 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+tasks.compileJava {
+    options.release.set(8)
 }
 
 plugins {
     java
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
     id("org.springframework.boot") version "2.7.2"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.spring") version "1.7.10"
+    id("io.spring.dependency-management") version "1.0.13.RELEASE"
 }
 
 allprojects {
@@ -40,7 +39,7 @@ subprojects {
 //        implementation("org.apache.logging.log4j:log4j-api:2.18.0")
 //        implementation("org.apache.logging.log4j:log4j-core:2.18.0")
 //        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3"){
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3") {
             because("使用无参构造")
         }
         implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -51,7 +50,7 @@ subprojects {
 
 
 buildscript {
-    val kotlinVersion = "1.7.10"
+    val kotlinVersion = "1.6.21"
     val springBootVersion = "2.7.2"
 
     dependencies {
