@@ -25,14 +25,6 @@ allprojects {
         plugin("org.jetbrains.kotlin.jvm")
     }
 
-    repositories {
-        mavenLocal()
-        maven {
-            url = uri("https://mirrors.huaweicloud.com/repository/maven/huaweicloudsdk/")
-        }
-        mavenCentral()
-    }
-
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -42,14 +34,18 @@ allprojects {
 }
 
 
+
 subprojects {
     dependencies {
-        implementation("org.apache.logging.log4j:log4j-api:2.18.0")
-        implementation("org.apache.logging.log4j:log4j-core:2.18.0")
-        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+//        implementation("org.apache.logging.log4j:log4j-api:2.18.0")
+//        implementation("org.apache.logging.log4j:log4j-core:2.18.0")
+//        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3"){
+            because("使用无参构造")
+        }
+        implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     }
 }
 
