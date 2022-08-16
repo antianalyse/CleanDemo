@@ -61,3 +61,10 @@ buildscript {
 }
 
 
+tasks.register("cleanStorage(清理所有任务的缓存)") {
+    group = "开发辅助"
+    description = "运行前,对所有任务缓存的清理"
+    doLast {
+        println(6696)
+    }
+}
