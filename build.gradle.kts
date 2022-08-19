@@ -39,6 +39,9 @@ subprojects {
 //        implementation("org.apache.logging.log4j:log4j-api:2.18.0")
 //        implementation("org.apache.logging.log4j:log4j-core:2.18.0")
 //        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+
+
+
         implementation(platform("com.fasterxml.jackson:jackson-bom"))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             because("使用无参构造")
@@ -62,7 +65,7 @@ buildscript {
 }
 
 
-tasks.register("cleane(清理所有任务的缓存)") {
+tasks.register("clean(清理所有任务的缓存)") {
     group = "开发辅助"
     description = "运行前,对所有任务缓存的清理"
     doLast {

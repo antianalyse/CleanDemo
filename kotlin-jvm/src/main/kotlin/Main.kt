@@ -1,9 +1,13 @@
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror
+import java.util.concurrent.Executors
 
 fun main() {
 
-   val a = 5 as  ScriptObjectMirror
+    Executors.newSingleThreadExecutor().submit {
+      println(222)
+   }
+
 
 }
 
