@@ -36,12 +36,7 @@ allprojects {
 
 subprojects {
     dependencies {
-//        implementation("org.apache.logging.log4j:log4j-api:2.18.0")
-//        implementation("org.apache.logging.log4j:log4j-core:2.18.0")
-//        implementation("io.reactivex.rxjava3:rxjava:3.1.5")
-
-
-
+        implementation("io.temporal:temporal-sdk:1.15.1")
         implementation(platform("com.fasterxml.jackson:jackson-bom"))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             because("使用无参构造")
