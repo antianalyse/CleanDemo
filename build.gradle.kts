@@ -6,6 +6,11 @@ tasks.compileJava {
 
 plugins {
     java
+
+    // Apply the application plugin to add support for building a CLI application.
+    // 这个到底有什么用
+    // application
+
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     id("org.springframework.boot") version "2.7.2"
@@ -36,11 +41,12 @@ allprojects {
 
 subprojects {
     dependencies {
-        implementation("io.temporal:temporal-sdk:1.15.1")
-        implementation(platform("com.fasterxml.jackson:jackson-bom"))
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
-            because("使用无参构造")
-        }
+
+//        implementation(platform("com.fasterxml.jackson:jackson-bom"))
+//        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
+//            because("使用无参构造")
+//        }
+
         implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
