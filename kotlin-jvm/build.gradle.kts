@@ -1,7 +1,6 @@
-
 dependencies {
 
-    implementation("io.temporal:temporal-sdk:1.15.1")
+    implementation("io.temporal:temporal-sdk:1.16.0")
 
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("commons-configuration:commons-configuration:1.10")
