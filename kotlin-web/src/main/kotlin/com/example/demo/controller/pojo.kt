@@ -7,18 +7,20 @@ class Result(
 class User(
     val name: String, val password: String
 ) {
-
 }
 
 class Product(
+    val id: Long,
     val companyName: String,
     val machineCode: String,
     val secretVersion: String,
     val programVersion: String,
     val expirationTime: String,
 ) {
-
-
-
 }
 
+class History(
+    val machineCode: String,
+    val activationCode: String,
+) {
+}
