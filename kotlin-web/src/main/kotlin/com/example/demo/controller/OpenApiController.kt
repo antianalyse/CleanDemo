@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*
 class OpenApiController {
 
     var loginOrNot = false
+    val list = listOf(
+        Product("山东盛科沃信息技术有限公司", "f3a74f2dd933b9dc3d3896185e52a163", "涉密", "检查版", "永久"),
+        Product("山东盛科沃信息技术有限公司", "a5fdba953fe56ccd7700b9fdc00c907a", "非涉密", "自查版", "永久"),
+        Product("山东盛科沃信息技术有限公司", "495955fdba953fdgdfgddfdc00casdas", "涉密", "检查版", "永久")
+    )
 
     @Autowired
     lateinit var openApiService: OpenApiService
@@ -21,6 +26,11 @@ class OpenApiController {
     @GetMapping("/checkLoginStatus")
     fun checkLoginStatus(): Boolean {
         return loginOrNot
+    }
+
+    @GetMapping("/list")
+    fun list(): Result {
+        return Result("登录成功", list)
     }
 
     @PostMapping("/login")

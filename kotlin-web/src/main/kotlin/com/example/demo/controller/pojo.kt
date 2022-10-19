@@ -9,3 +9,16 @@ class User(
 ) {
 
 }
+
+class Product(
+    val companyName: String,
+    val machineCode: String,
+    val secretVersion: String,
+    val programVersion: String,
+    val expirationTime: String,
+) {
+
+
+
+}
+
