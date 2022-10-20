@@ -40,6 +40,19 @@ class OpenApiController {
         return Result("登录成功", list)
     }
 
+
+    var activated = false
+
+    @GetMapping("/activate/{id}/{machineCode}")
+    fun activate(
+        @PathVariable(value = "id") id: String, @PathVariable(value = "machineCode") machineCode: String
+    ): Result {
+        return Result(
+            "登录成功",
+            "666666666666666fyqf7KT4NmZOJt+7ONWX4494Q2kM6ul+r9Wf9NNXTxMhFjyf0IWvK4aVz8gf666666666di/aiyqdg=P/z3Oh1r4H2zcI4"
+        )
+    }
+
     val a = History(
         "2020-10-9",
         "f3a74f2dd933b9dc3d3896185e52a163",
@@ -48,12 +61,26 @@ class OpenApiController {
 
     @GetMapping("/history/{id}")
     fun history(@PathVariable(value = "id") id: String): Result {
+        activated = true
+
         Thread.sleep(500)
         var bb = ArrayList<History>()
         for (i in 0..Random.nextInt(0, 10)) {
             bb.add(a)
         }
+
+        if (activated) {
+            bb.add(
+                History(
+                    "2020-10-9",
+                    "f3a74f2dd933b9dc3d3896185e52a163",
+                    "666666666666666fyqf7KT4NmZOJt+7ONWX4494Q2kM6ul+r9Wf9NNXTxMhFjyf0IWvK4aVz8gf666666666di/aiyqdg=P/z3Oh1r4H2zcI4\"\n" + "      "
+                )
+            )
+        }
+
         return Result("登录成功", bb)
+
     }
 
 
