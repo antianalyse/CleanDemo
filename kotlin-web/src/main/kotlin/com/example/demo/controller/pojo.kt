@@ -20,6 +20,7 @@ class Product(
 }
 
 class History(
+    val generateTime: String,
     val machineCode: String,
     val activationCode: String,
 ) {
