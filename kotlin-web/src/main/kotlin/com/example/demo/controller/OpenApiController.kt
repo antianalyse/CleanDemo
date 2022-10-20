@@ -36,6 +36,7 @@ class OpenApiController {
 
     @GetMapping("/list")
     fun list(): Result {
+        Thread.sleep(500)
         return Result("登录成功", list)
     }
 
@@ -47,7 +48,7 @@ class OpenApiController {
 
     @GetMapping("/history/{id}")
     fun history(@PathVariable(value = "id") id: String): Result {
-        Thread.sleep(1000)
+        Thread.sleep(500)
         var bb = ArrayList<History>()
         for (i in 0..Random.nextInt(0, 10)) {
             bb.add(a)
@@ -58,8 +59,7 @@ class OpenApiController {
 
     @PostMapping("/login")
     fun login(@RequestBody user: User): Result {
-        println(user.name)
-        println(user.password)
+        Thread.sleep(500)
 
         if (user.name == "123" && user.password == "456") {
             loginOrNot = true
