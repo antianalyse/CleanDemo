@@ -59,16 +59,14 @@ class OpenApiController {
         "LoZFFw44xssB90mIedq4fyqf7KT4NmZOJt+7ONWX4494Q2kM6ul+r9Wf9NNXTxMhFjyf0IWvK4aVz8gf0HCGnOI9MqR9jtCVridi/aiyqdg=P/z3Oh1r4H2zcI4\n"
     )
 
-    @GetMapping("/history/{id}")
+    @GetMapping("/historyList/{id}")
     fun history(@PathVariable(value = "id") id: String): Result {
         activated = true
-
         Thread.sleep(500)
         var bb = ArrayList<History>()
         for (i in 0..Random.nextInt(0, 10)) {
             bb.add(a)
         }
-
         if (activated) {
             bb.add(
                 History(
@@ -78,11 +76,19 @@ class OpenApiController {
                 )
             )
         }
-
         return Result("登录成功", bb)
-
     }
 
+    @GetMapping("/currentHistory/{id}")
+    fun currentHistory(@PathVariable(value = "id") id: String): Result {
+        Thread.sleep(500)
+        val bb = History(
+            "2020-10-9",
+            "f3a74f2dd933b9dc3d3896185e52a163",
+            "666666666666666fyqf7KT4NmZOJt+7ONWX4494Q2kM6ul+r9Wf9NNXTxMhFjyf0IWvK4aVz8gf666666666di/aiyqdg=P/z3Oh1r4H2zcI4\"\n" + "      "
+        )
+        return Result("登录成功", bb)
+    }
 
     @PostMapping("/login")
     fun login(@RequestBody user: User): Result {
